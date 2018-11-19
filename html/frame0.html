@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>In数字银行</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/vue.js"></script>
+    <script type="text/javascript" src="../script/jquery.js"></script>
+    <script type="text/javascript" src="../script/service.js"></script>
+
+    <style>
+        html, body {
+            background: linear-gradient(rgba(15, 32, 69, 1), rgba(46, 34, 5, 1));
+        }
+
+        .app {
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .banner {
+            width: 100%;
+            height: 151px;
+        }
+
+        .banner img {
+            width: 100%;
+            /*height: 100%;*/
+        }
+
+        .nav {
+            width: 100%;
+            height: 100px;
+            display: -webkit-flex;
+            align-items: center;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 0px 0px 3px 3px;
+        }
+
+        .nav li {
+            width: 25%;
+            text-align: center;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+        }
+
+        .nav img {
+            width: 43px;
+            height: 43px;
+        }
+
+        .nav span {
+            font-size: 13px;
+            color: rgba(34, 34, 34, 1);
+            margin-top: 5px;
+        }
+
+        .information {
+            width: 100%;
+            height: 190px;
+            margin-top: 9px;
+            background: url(../image/section_bg.png) no-repeat center;
+            background-size: 100% 100%;
+            padding: 15px 20px;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .information li:nth-child(1) {
+            width: 66px;
+            font-size: 18px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .information li:nth-child(2) {
+            margin-top: 12px;
+        }
+
+        .information li:nth-child(2) h4 {
+            height: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.38);
+            line-height: 16px;
+        }
+
+        .information li:nth-child(2) .number {
+            line-height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .information li:nth-child(2) .number h2 {
+            font-size: 36px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .information li:nth-child(2) .number i {
+            width: 63.5px;
+            height: 22px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 22px;
+            font-size: 12px;
+            line-height: 24px;
+            text-align: center;
+            color: rgba(26, 101, 247, 1);
+        }
+
+        .information li:nth-child(3) {
+            height: 25px;
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 25px;
+            text-shadow: 0px 2px 4px rgba(7, 36, 166, 1);
+            margin-top: 9px;
+        }
+
+        .information li:nth-child(4) {
+            height: 25px;
+            font-size: 12px;
+            margin-top: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .information li:nth-child(4) p {
+            height: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .information li:nth-child(4) span {
+            height: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 16px;
+            margin-left: 20px;
+        }
+
+        .financial {
+            width: 100%;
+            margin: 9px 0;
+            height: 260px;
+            background: rgba(255, 255, 255, 1);
+            border-radius: 3px;
+            padding: 9px 10px;
+            box-sizing: border-box;
+        }
+
+        .financial h2 {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(34, 34, 34, 1);
+        }
+
+        .financial_one {
+            height: 100px;
+            margin: 15px 0 0;
+            border-bottom: 1px solid rgba(177, 177, 177, 1);
+            position: relative;
+        }
+
+        .diffright {
+            border-bottom: none;
+            margin: 15px 0 25px;
+        }
+
+        .one_tit {
+            width: 38px;
+            height: 20px;
+            line-height: 20px;
+            font-size: 10px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            background: url(../image/home_tit_bg.png) no-repeat center;
+            background-size: 100% 100%;
+            position: absolute;
+            left: -12.8px;
+            top: -5px;
+        }
+
+        .one_base {
+                width: 100%;
+                padding: 15px 10px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+        }
+
+        .diff_base {
+            align-items: baseline;
+        }
+
+        .one_left {
+            font-size: 12px;
+            text-align: center;
+            color: rgba(161, 114, 1, 1);
+        }
+
+        .one_left h2 {
+            color: rgba(161, 114, 1, 1);
+        }
+
+        .one_left h2 span {
+            font-size: 24px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+        }
+
+        .one_left p {
+            text-align: left;
+        }
+
+        .one_right {
+            /* width: 160px; */
+            text-align: center;
+        }
+
+        .one_right .right1 {
+            width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            line-height: 22px;
+        }
+
+        .one_right .right1 p {
+            font-size: 16px;
+            font-family: PingFangSC-Medium;
+            font-weight: 600;
+            color: rgba(34, 34, 34, 1);
+        }
+
+        .one_right .right2 {
+            width: 170px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 400;
+            color: rgba(68, 68, 68, 1);
+            line-height: 22px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="app" v-cloak>
+        <div class="banner"></div>
+        <ul class="nav">
+            <li @click="openFn(1)">
+                <img src="../image/nav_save.png" />
+                <span>币增宝</span>
+            </li>
+            <li @click="openFn(2)">
+                <img src="../image/nav_money.png" />
+                <span>理财宝</span>
+            </li>
+            <li @click="goPoster(1)">
+                <img src="../image/nav_credit.png" />
+                <span>数贷宝</span>
+            </li>
+            <li @click="goPoster(2)">
+                <img src="../image/nav_believe.png" />
+                <span>企信宝</span>
+            </li>
+        </ul>
+
+        <ul class="information">
+            <li>InBank</li>
+            <li>
+                <h4>当前余额</h4>
+                <div class="number">
+                    <h2>{{parseFloat(Number(homeList.account_num)).toFixed(2)}}</h2>
+                    <i @click="checked(homeList.flag)" v-show="homeList.flag==0">立即激活</i>
+                    <i @click="checked(homeList.flag)" v-show="homeList.flag==1">立即激活</i>
+                    <i @click="goIN()" v-show="homeList.flag==2">获取财富</i>
+                    <i @click="checked(homeList.flag)" v-show="homeList.flag==3">立即激活</i>
+                    <i @click="checked(homeList.flag)" v-show="homeList.flag==4">立即激活</i>
+                </div>
+            </li>
+            <li v-if="homeList.user_sn">{{homeList.user_sn | split4}}</li>
+            <li>
+                <p>{{homeList.sign}}</p>
+                <p>注册日期<span>{{homeList.date}}</span></p>
+            </li>
+        </ul>
+        <div class="financial">
+            <h2>精选理财</h2>
+            <ul class="financial_one" v-if="bzbData" @click="invest(bzbData.id,1,bzbData.name)">
+                <li class="one_tit">{{bzbList.plan_type}}</li>
+                <li class="one_base">
+                    <div class="one_left">
+                        <h2><span v-if="bzbData">{{bzbData.plan_rate*100 | fix2}}</span>%</h2>
+                        <p>年化收益率</p>
+                    </div>
+                    <div class="one_right">
+                        <div class="right1">
+                            <p>{{bzbData.name}}</p>
+                            <p><span>{{bzbData.lock_period}}</span>天</p>
+                        </div>
+                        <div class="right2">支持{{bzbData.support_coins}}</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="financial_one diffright" v-if="lcbData" @click="invest(lcbData.id,2,lcbData.name)">
+                <li class="one_tit">{{lcbList.plan_type}}</li>
+                <li class="one_base">
+                    <div class="one_left">
+                        <h2><span v-if="lcbData">{{lcbData.plan_rate*100 | fix2}}</span>%</h2>
+                        <p>年化收益率</p>
+                    </div>
+                    <div class="one_right">
+                        <div class="right1">
+                            <p>{{lcbData.name}}</p>
+                            <p><span>{{lcbData.lock_period}}</span>天</p>
+                        </div>
+                        <div class="right2">支持{{lcbData.support_coins}}</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    var app;
+    function re() {
+        app.init();
+    }
+    apiready = function () {
+        app = new Vue({
+            el: ".app",
+            data: {
+                homeList: [],
+                bzbList: [],
+                lcbList: [],
+                bzbData: {},
+                lcbData: {},
+                bannersList: []
+            },
+            computed: {},
+            created: function () {
+                var that = this;
+                api.setRefreshHeaderInfo({
+                    loadingImg: 'wsidget://image/refresh.png',
+                    bgColor: 'rgba(15, 32, 69, 1)',
+                    textColor: '#fff',
+                    textDown: '下拉刷新...',
+                    textUp: '松开刷新...'
+                }, function (ret, err) {
+                    that.init();
+                });
+                this.init();
+            },
+            methods: {
+                init: function () {
+                    var that = this;
+                    api.showProgress({
+                        style: 'default',
+                        animationType: 'fade',
+                        title: '努力加载中...',
+                        modal: false
+                    });
+                    $http({
+                        url: '/api/v1/home/banners',
+                        method: "get"
+                    }).then(function (res) {
+                        api.hideProgress();
+                        console.log(JSON.stringify(res));
+                        var arr = res.data;
+                        var newArr = [];
+                        for (var i = 0; i < arr.length; i++) {
+                            newArr.push(arr[i].picture)
+                        }
+                        that.bannersList = newArr;
+                        console.log(that.bannersList);
+                        setTimeout(function () {
+                            that.fnOpen();
+                        }, 500);
+                    });
+                    $http({
+                        url: '/api/v1/inbank/home/account',
+                        method: "get"
+                    }).then(function (res) {
+                        api.hideProgress();
+                        console.log(JSON.stringify(res.data));
+                        that.homeList = res.data;
+                    });
+                    $http({
+                        url: '/api/v1/inbank/home/sift_list',
+                        method: "get"
+                    }).then(function (res) {
+                        api.hideProgress();
+                        console.log(JSON.stringify(res.data.bzb));
+                        console.log(JSON.stringify(res.data.lcb));
+                        that.bzbList = res.data.bzb;
+                        that.lcbList = res.data.lcb;
+                        that.bzbData = res.data.bzb.data;
+                        that.lcbData = res.data.lcb.data;
+                        api.refreshHeaderLoadDone();
+                    });
+                },
+                invest: function (id, flag, name) {
+                    api.openWin({
+                        name: "assetsDetailsWin",
+                        url: "home/increase/assetsDetailsWin.html",
+                        pageParam: {
+                            id: id,
+                            flag: flag,
+                            name: name
+                        }
+                    })
+                },
+                fnOpen: function () {
+                    var UIScrollPicture = api.require('UIScrollPicture');
+                    var y = $api.offset($api.dom('.banner')).t;
+                    var w = api.winWidth - 20;
+                    var h = 152;
+                    UIScrollPicture.open({
+                        rect: {
+                            x: 10,
+                            y: y,
+                            w: w,
+                            h: h,
+                        },
+                        placeholderImg: '../image/section_bg.png',
+                        fixedOn: api.frameName,
+                        fixed: false,
+                        data: {
+                            paths: this.bannersList
+                            // paths: [
+                            //     'widget://image/market11.jpg',
+                            //     'widget://image/market22.jpg'
+                            // ]
+                        },
+                        styles: {
+                            indicator: {
+                                dot: {
+                                    w: 9,
+                                    h: 5,
+                                    r: 2,
+                                    margin: 2
+                                },
+                                align: 'center',
+                                color: '#3E5196',
+                                activeColor: '#94B4E2'
+                            }
+                        },
+                    }, function (ret, err) {
+                        if (ret) {
+                            // alert(JSON.stringify(ret));
+                        } else {
+                            // alert(JSON.stringify(err));
+                        }
+                    });
+                },
+                checked: function (f) {
+                    var f1 = Number(f);
+                    if (f1 == 0) {
+                        alert("用户未实名认证！");
+                    } else if (f1 == 1) {
+                        alert("实名认证待审核！");
+                    } else if (f1 == 3) {
+                        alert("实名认证被驳回，请重新提交！");
+                    } else if (f1 == 4) {
+                        alert("实名认证被禁止，请联系平台！");
+                    } else {
+                    }
+                },
+                replace: function (str) {
+                    var str1 = str.toString();
+                    return str1.replace(/,/g, "、");
+                },
+                openFn: function (type) {
+                    api.openWin({
+                        name: "increaseWin",
+                        url: "home/increaseWin.html",
+                        pageParam: {
+                            type: type
+                        }
+                    });
+                },
+                goRegister: function () {
+                    api.openWin({
+                        name: 'registerWin',
+                        url: './login/registerWin.html'
+                    });
+                },
+                goPoster(type) {
+                    api.openWin({
+                        name: "posterWin",
+                        url: "home/posterWin.html",
+                        pageParam: {
+                            type: type
+                        }
+                    })
+                },
+                goIN: function () {
+                    api.openWin({
+                        name: 'InAssetsWin',
+                        url: 'asset/InAssets/InAssetsWin.html'
+                    });
+                },
+                goTip: function () {
+                    alert("该功能暂未开放！");
+                }
+            },
+            filters: {
+                split4: function (val) {
+                    var str = val + "";
+                    return str.substr(0, 4) + " " + str.substr(4, 4) + " " + str.substr(8, 4) + " " + str.substr(12, 4)
+                },
+                fix2: function (val) {
+                    return parseFloat(Number(val)).toFixed(2);
+                }
+            }
+        });
+    }
+</script>

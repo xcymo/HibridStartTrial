@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>交易</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <style>
+        html,body,#app {
+            background:-webkit-linear-gradient(bottom,#302201,#0E2048);
+            background:-o-linear-gradient(bottom,#302201,#0E2048);
+            background: -moz-linear-gradient(bottom,#302201,#0E2048);
+            background:linear-gradient(to top,#302201,#0E2048);
+        }
+        #app {
+  min-height: 100vh;
+}
+.header {
+  overflow-x: scroll;
+  border-bottom: 1px solid #464646;
+}
+.header .scrollBarX {
+  width: max-content;
+}
+.activePane{
+    color: #1A65F7;
+}
+.header .scrollBarX .baseCoin {
+  width: 64px;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  padding: 12px 0 8px 0;
+  position: relative;
+  line-height: 20px;
+}
+.header .scrollBarX .bottomLine {
+  display: none;
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: -1px;
+  background: #1A65F7;
+  height: 4px;
+}
+.header .scrollBarX .activeLine {
+  display: block;
+}
+.contentBox {
+  background-color: #fff;
+  border-radius: 3px;
+  margin: 9px;
+}
+.contentBox .tradeBox {
+  height: 65px;
+  padding: 0 21px 0 15px;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #b1b1b1;
+}
+.contentBox .tradeBox .tradeLeft{
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+.contentBox .tradeBox .tradeLeft .main {
+  color: #222;
+  font-size: 16px;
+}
+.contentBox .tradeBox .tradeLeft .base {
+  color: #666;
+  font-size: 12px;
+}
+.contentBox .tradeBox .tradeRight {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+}
+.contentBox .tradeBox .tradeRight .exchageRate {
+  color: #222;
+  font-size: 13px;
+  text-align: right;
+}
+.contentBox .tradeBox .tradeRight .cnyPrice {
+  color: #A77B10;
+  font-size: 12px;
+  text-align: right;
+}
+.contentBox .tradeBox .tradeRight img {
+  margin-left: 17px;
+  width: 4px;
+  height: 10px;
+}
+.contentBox .noLine {
+  border-bottom: none;
+}
+.todobtn{
+    color: #fff;
+    background-color: #0c0;
+    height: 25px;
+    width: 100px;
+    margin: 10px;
+}
+       .inlineblock{
+           display: inline-block;
+           margin-left: 10px;
+       }
+       .matchImg{
+           display: inline-block !important;
+           width: 40px;
+           height: 40px;
+       }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <div class="header">
+            <div class="scrollBarX">
+                <div class="baseCoin" v-for="(data,key,index) in tradeData" @click="switchTabs(index)">
+                    {{data.sys_name}}
+                    <div class="bottomLine"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 外层循环每个基础币种 -->
+        <div class="contentBox" v-for="(base,outkey,index) in tradeData" v-show="curIndex==index">
+            <!-- 内层循环基础币种下支持的交易对 -->
+            <!-- 最后一个元素不显示border-bottom -->
+            <div class="tradeBox" v-for="(match,innerkey,indexInner) in base.canTransCoins" :class="{noLine:indexInner==base.canTransCoins.length-1}"
+                @click="openWinFn('tradeListWin',{base:base.sys_name,match:match.sys_name})">
+                <div class="tradeLeft">
+                    <img class="matchImg" :src="getIcon(match.sys_name)">
+                    <div class="inlineblock">
+                        <span class="main" v-cloak>{{match.sys_name}}</span>/
+                        <span class="base" v-cloak>{{base.sys_name}}</span>
+                    </div>
+                </div>
+                <div class="tradeRight">
+                    <div>
+                        <div class="exchageRate" v-show="curIndex!=5" v-cloak>{{1/match.exchange_rate | fix5}}</div>
+                        <div class="cnyPrice" v-cloak>￥{{match.coin_value | fix5}}</div>
+                    </div>
+                    <img src="../image/arrowRight.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/service.js"></script>
+<script type="text/javascript">
+    var vue;
+    function re() {
+        vue.init();
+    }
+    apiready = function () {
+        api.setFrameAttr({
+            name: api.frameName,
+            bounces: false,
+        });
+        vue = new Vue({
+            el: "#app",
+            data: {
+                tradeData: [],
+                baseCoin: [],
+                curIndex: 0
+            },
+            created: function () {
+                var _this = this;
+                api.setRefreshHeaderInfo({
+                    loadingImg: 'wsidget://image/refresh.png',
+                    bgColor: 'rgba(15, 32, 69, 1)',
+                    textColor: '#fff',
+                    textDown: '下拉刷新...',
+                    textUp: '松开刷新...'
+                }, function (ret, err) {
+                    _this.init();
+                });
+                this.init();
+                this.openArc();
+            },
+            mounted: function () {
+                var _this = this;
+                setTimeout(function () {
+                    _this.switchTabs(0);
+                }, 500);
+            },
+            methods: {
+                switchTabs: function (index) {
+                    var doms = $api.domAll('.baseCoin');
+                    if ($api.hasCls(doms[index], 'activePane')) {
+                        return
+                    }
+                    this.curIndex = index;
+                    for (var i = 0; i < doms.length; i++) {
+                        $('.baseCoin').eq(i).removeClass('activePane')
+                        $('.baseCoin').eq(i).children("div").removeClass('activeLine');
+                    };
+                    $('.baseCoin').eq(index).addClass('activePane');
+                    $('.baseCoin').eq(index).children('.bottomLine').addClass('activeLine');
+                },
+                init: function () {
+                    var _this = this;
+                    $http({
+                        url: '/api/v1/c2c/trans-hall',
+                        method: "get"
+                    }).then(function (res) {
+                        if (res.code == 200) {
+                            console.log(JSON.stringify(res));
+                            _this.tradeData = res.data;
+                            var base = [];
+                            for (var i = 0; i < res.data.length; i++) {
+                                base.push(res.data[i].sys_name);
+                            }
+                            _this.baseCoin = base;
+                            console.log(JSON.stringify(res));
+                        }
+                        api.refreshHeaderLoadDone();
+                    })
+                },
+                openWinFn: function (name, obj) {
+                    var pageParam = {};
+                    if (obj) {
+                        if (obj.base) {
+                            pageParam.base = obj.base;
+                        }
+                        if (obj.match) {
+                            pageParam.match = obj.match;
+                        }
+                    }
+                    api.openWin({
+                        name: name,
+                        url: 'trade/' + name + '.html',
+                        pageParam: pageParam
+                    });
+                },
+                getIcon: function (name) {
+                    var src = "";
+                    if (name == "BTC") {
+                        src = "../image/BTC.png";
+                    }
+                    if (name == "ETH") {
+                        src = "../image/ETH.png";
+                    }
+                    if (name == "IN") {
+                        src = "../image/IN.png";
+                    }
+                    if (name == "DCOIN") {
+                        src = "../image/DCOIN.png";
+                    }
+                    if (name == "USDT") {
+                        src = "../image/USDT.png";
+                    }
+                    if (name == "FCP") {
+                        src = "../image/FCP.png";
+                    }
+                    if (name == "EOS") {
+                        src = "../image/EOS.png";
+                    }
+                    return src;
+                },
+                openArc: function () {
+                    var _this = this;
+                    var arcMenu = api.require('arcMenu');
+                    arcMenu.open({
+                        mainMenu: {
+                            x: api.frameWidth / 2,
+                            y: api.frameHeight - 55,
+                            w: 78,
+                            h: 78,
+                            img: "widget://image/operation.png",
+                            imgLight: "widget://image/operation.png"
+                        },
+                        items: [
+                            {
+                                w: 60,
+                                h: 60,
+                                img: "widget://image/historyEntrust.png",
+                                imgLight: "widget://image/historyEntrust.png"
+                            },
+                            {
+                                w: 60,
+                                h: 60,
+                                img: "widget://image/curEntrust.png",
+                                imgLight: "widget://image/curEntrust.png"
+                            },
+                            {
+                                w: 60,
+                                h: 60,
+                                img: "widget://image/release.png",
+                                imgLight: "widget://image/release.png"
+                            },
+                            {
+                                w: 60,
+                                h: 60,
+                                img: "widget://image/curOrder.png",
+                                imgLight: "widget://image/curOrder.png"
+                            },
+                            {
+                                w: 60,
+                                h: 60,
+                                img: "widget://image/historyOrder.png",
+                                imgLight: "widget://image/historyOrder.png"
+                            }
+                        ],
+                        startAngle: 270,
+                        wholeAngle: 180,
+                        radius: 70,
+                        shieldClick: false,
+                        fixedOn: api.frameName
+                    }, function (ret, err) {
+                        if (ret.index == 0) {
+                            _this.openWinFn('historyEntrustWin')
+                        } else if (ret.index == 1) {
+                            _this.openWinFn('curEntrustWin')
+                        } else if (ret.index == 2) {
+                            _this.openWinFn('releaseWin')
+                        } else if (ret.index == 3) {
+                            _this.openWinFn('curOrderWin')
+                        } else if (ret.index == 4) {
+                            _this.openWinFn('historyOrderWin')
+                        }
+                        arcMenu.close();
+                    });
+                }
+            },
+            filters: {
+                fix5: function (val) {
+                    return parseFloat(Number(val)).toPrecision(5);
+                },
+                fix8: function (val) {
+                    return parseFloat(Number(val)).toPrecision(8);
+                }
+            }
+        })
+    }
+
+
+</script>

@@ -1,0 +1,233 @@
+.background-a {
+  background-color: #1f024e;
+}
+
+.background-l {
+  background-color: #04124c;
+}
+
+.font-l {
+  color: #40bfd1;
+}
+
+.font-a {
+  color: #3e5196;
+}
+
+/*强调*/
+.button-q {
+  background: -webkit-linear-gradient(left, #ff62d8, #496ddb);
+  background: -o-linear-gradient(right, #ff62d8, #496ddb);
+  background: -moz-linear-gradient(right, #ff62d8, #496ddb);
+  background: linear-gradient(to right, #ff62d8, #496ddb);
+  color: #fff;
+  font-size: 12px;
+  padding: 0px 16px;
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  border-bottom-right-radius: 22px;
+  height: 28px;
+  line-height: 28px;
+}
+
+/*复制*/
+.button-f {
+  background: -webkit-linear-gradient(left, #ff62d8, #496ddb);
+  background: -o-linear-gradient(right, #ff62d8, #496ddb);
+  background: -moz-linear-gradient(right, #ff62d8, #496ddb);
+  background: linear-gradient(to right, #ff62d8, #496ddb);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 26px;
+  width: 74px;
+  height: 26px;
+  line-height: 26px;
+}
+
+/*确认按钮 注册*/
+.button-g {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  background: #fff;
+  color: #061c69;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid #061c69;
+}
+
+/*登录*/
+.button-l {
+  width: 100%;
+  height: 44px;
+  line-height: 44px;
+  background: #061c69;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+}
+
+/*下一步*/
+.button-next {
+  width: 157px;
+  height: 44px;
+  line-height: 44px;
+  background: #061c69;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid #061c69;
+}
+
+html,
+body {
+  font-size: 14px;
+  height: 100%;
+}
+.hover {
+  opacity: 0.8;
+}
+
+.flex-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.flex-con {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+.flex-vertical {
+  -webkit-box-orient: vertical;
+  -webkit-flex-flow: column;
+  flex-flow: column;
+}
+
+.border-t,
+.border-b {
+  position: relative;
+}
+.border-t:before,
+.border-b:after {
+  top: auto;
+  bottom: 0;
+}
+.phone input {
+  margin-left: 0 !important;
+}
+body {
+  background: #fff;
+  min-height: 100vh;
+}
+
+select {
+  /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+  border: solid 1px #000;
+  /*很关键：将默认的select选择框样式清除*/
+  padding-right: 15px !important;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: url("../image/sanjiao.png") no-repeat right center;
+  background-size: 10px 6px;
+}
+
+.label {
+  border-bottom: 1px solid #ebf0f8;
+}
+header {
+  background-color: rgba(15, 32, 69, 1) !important;
+}
+header ul li {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  display: none;
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+}
+header ul li.active {
+  display: block;
+}
+header img {
+  width: 25px;
+  position: absolute;
+  left: 10px;
+  top: 20px;
+}
+.empty_page img {
+  width: 90px;
+}
+.empty_page {
+  text-align: center;
+  padding-top: 100px;
+}
+.empty_page p {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #d0d0d0;
+}
+.btn-sure {
+  width: 100%;
+}
+.btn-submit {
+  width: 100%;
+}
+[v-cloak] {
+  display: none !important;
+}
+.label input {
+  width: 100%;
+  color: #14141b;
+  background: transparent;
+  line-height: 50px;
+}
+
+*:foucs {
+  outline: none;
+}
+#wrap {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "BDZYJT--GB1-0";
+  src: url("../font/BDZYJT--GB1-0.ttf");
+}
+
+button {
+  outline: none;
+}
+
+/*为空页面的样式*/
+.notExistDiv {
+  padding-top: 80px;
+  text-align: center;
+  background-color: #fff;
+}
+.hiddenDiv {
+  display: none;
+}
+.notExistDiv img {
+  width: 118px;
+  height: 118px;
+}
+.noDataText {
+  margin-top: 20px;
+  color: #505f95;
+  font-size: 15px;
+}
+[v-cloak] {
+  display: none;
+}
+
+.icon-zuo {
+  text-align: center;
+  position: absolute;
+  font-size: 18px;
+  color: #ffffff;
+  left: 16px;
+}

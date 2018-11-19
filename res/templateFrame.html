@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/vue.js"></script>
+<script type="text/javascript" src="../../script/jquery.js"></script>
+<script type="text/javascript" src="../../script/service.js"></script>
+<script type="text/javascript">
+    var app;
+    apiready = function () {
+        app = new Vue({
+            el: "",
+            data: {
+                data: 0
+            },
+            methods: {
+
+            },
+            computed: {
+                lang: function () {
+                    var lang = localStorage.lang;
+                    if (lang == 'zh' || lang == '' || !lang) {
+                        return zh
+                    } else if (lang == 'en') {
+                        return en
+                    } else {
+                        return com
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>

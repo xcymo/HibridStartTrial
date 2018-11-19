@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>资产</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/vue.js"></script>
+    <script type="text/javascript" src="../script/service.js"></script>
+    <script type="text/javascript" src="../script/jquery.js"></script>
+
+    <style>
+        html, body {
+            background:rgba(15, 32, 69, 1);            
+        }
+        .app {
+            background: linear-gradient(rgba(15, 32, 69, 1), rgba(46, 34, 5, 1));            
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .header {
+            width: 100%;
+            height: 100px;
+            background: rgba(26, 101, 247, 1);
+            border-radius: 3px;
+        }
+
+        .header_top {
+            width: 102.5px;
+            height: 27px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(61, 119, 233, 1) 0%, rgba(13, 78, 207, 1) 100%);
+            border-radius: 3px;
+            opacity: 0.5;
+            margin: 0 auto;
+            font-size: 12px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            line-height: 27px;
+        }
+
+        .header_content {
+            font-weight: 400;
+            color: rgba(222, 218, 218, 1);
+            font-size: 12px;
+            text-align: center;
+            margin-top: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header_content p {
+            font-size: 24px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            margin-left: 10px;
+        }
+
+        .section {
+            width: 100%;
+            margin: 9px 0;
+             background: rgba(255, 255, 255, 1);
+            border-radius: 3px;
+        }
+
+        .section_money {
+            border-bottom: 1px solid rgba(177, 177, 177, 1);
+        }
+
+        .money_tittle {
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .tittle_left {
+            font-size: 16px;
+            font-family: PingFangSC-Medium;
+            font-weight: 500;
+            color: rgba(34, 34, 34, 1);
+            margin-left: 33px;
+        }
+
+        .tittle_right {
+            margin-right: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right_p {
+            margin-right: 8px;
+        }
+
+        .right_p p {
+            font-size: 13px;
+            font-weight: 500;
+            font-family: PingFangSC-Medium;
+            line-height: 18px;
+            text-align: right;
+        }
+
+        .right_p p:nth-child(1) {
+            color: rgba(255, 94, 94, 1);
+        }
+
+        .right_p p:nth-child(2) {
+            color: rgba(167, 123, 16, 1);
+        }
+
+        .tittle_right .icon-xia {
+            font-size: 14px;
+            color: rgba(34, 34, 34, 1);;
+        }
+
+        .money_content {
+            height: 50px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(228, 228, 228, 1) 100%);
+            border-top: 1px solid rgba(177, 177, 177, 1);
+            border-bottom: 1px solid rgba(177, 177, 177, 1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .diff_cont {
+            border-top: none;
+        }
+
+        .money_content li {
+            width: 88px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 13px;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(68, 68, 68, 1);
+            border-right: 1px solid rgba(177, 177, 177, 1);
+        }
+
+        .money_content li:nth-child(4) {
+            border-right: none;
+        }
+
+
+        /* xcy */
+
+        .list {
+            /* padding-bottom: 20px; */
+        }
+
+        .list ul li {
+            background: #fff;
+            display: flex;
+            padding: 18px 10px;
+            border-bottom: 1px solid #ccc;
+            justify-content: space-between;
+            ;
+            color: #7d7d7d;
+        }
+
+        .list ul li img {
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            border: 3px solid #e9e9e9;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .list ul li>span {
+            display: flex;
+            font-size: 15px;
+            color: #222;
+            align-items: center;
+        }
+
+        .list_info>p {
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        .list_info>span{
+            color:#c9c9c9;   
+        }
+        .list_info {
+            vertical-align: middle;
+            display: inline-block;
+        }
+        img{
+            display: inline-block !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app" v-cloak>
+        <!-- <div class="content_one">
+            <div class="header">
+                <div class="header_top">
+                    总资产
+                </div>
+                <div class="header_content">≈<p><span>0.00</span> CNY</p>
+                </div>
+            </div>
+            <div class="noDataDiv" v-show="coinList.length<1">
+                <div class="picDiv">
+                    <img src="../image/empty.png" />
+                </div>
+                <div class="info">请先去实名认证哦</div>
+            </div>
+        </div> -->
+        <div class="content_one">
+            <div class="header">
+                <div class="header_top">
+                    总资产
+                </div>
+                <div class="header_content">≈<p><span>{{parseFloat(Number(total)).toFixed(2)}}</span> CNY</p>
+                </div>
+            </div>
+            <div class="list" v-for="coin in coinList" @click="openWinFn('coinDetailPages',{coin:coin})">
+                <ul>
+                    <li>
+                        <div>
+                            <img :src="coin.coin_logo">
+                            <div class="list_info">
+                                <p>{{coin.coin_name}}({{coin.coin_short_name}})</p>
+                                <span>1{{coin.coin_short_name}}≈{{coin.coin_price}}</span>
+                            </div>
+                        </div>
+                        <span>{{coin.balance}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="noDataDiv" v-show="coinList.length<1">
+                <div class="picDiv">
+                    <img src="../image/empty.png" />
+                </div>
+                <div class="info">暂时没有数据哦</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    var app;
+    function re() {
+        app.init();
+    }
+    apiready = function () {
+        app = new Vue({
+            el: ".app",
+            data: {
+                flag: 0,
+                homeList: [],
+                coinList: [],
+                total: []
+            },
+            computed: {},
+            created: function () {
+                var that = this;
+                api.setRefreshHeaderInfo({
+                    loadingImg: 'wsidget://image/refresh.png',
+                    bgColor: 'rgba(15, 32, 69, 1)',
+                    textColor: '#fff',
+                    textDown: '下拉刷新...',
+                    textUp: '松开刷新...'
+                }, function (ret, err) {
+                    that.init();
+                    api.refreshHeaderLoadDone();
+                });
+                this.init();
+            },
+            methods: {
+                menu: function (f, dom) {
+                    if (f == this.flag) {
+                        this.flag = 0;
+                        return
+                    } else {
+                        this.flag = f;
+                    }
+                },
+                init: function () {
+                    var that = this;
+                    api.showProgress({
+                        style: 'default',
+                        animationType: 'fade',
+                        title: '努力加载中...',
+                        modal: false
+                    });
+                    $http({
+                        url: '/api/v1/c2c/accounts',
+                        method: "get"
+                    }).then(function (res) {
+                        api.hideProgress();
+                        console.log(JSON.stringify(res));
+                        that.coinList = res.data.account;
+                        that.total = res.data.sum_cny;
+                    });
+                    $http({
+                        url: '/api/v1/inbank/home/account',
+                        method: "get"
+                    }).then(function (res) {
+                        api.hideProgress();
+                        console.log(JSON.stringify(res.data));
+                        that.homeList = res.data;
+                    });
+                },
+                openWinFn: function (str, obj) {
+                    api.openWin({
+                        name: str + "Win",
+                        url: './asset/' + str + 'Win.html',
+                        pageParam: obj
+                    });
+                },
+                goAccount: function (id) {
+                    api.openWin({
+                        name: 'accountDetailsWin',
+                        url: './asset/accountDetailsWin.html',
+                        pageParam: {
+                            coin_id: id,
+                        }
+                    });
+                },
+                goOperat: function (id) {
+                    api.openWin({
+                        name: 'operatRecordWin',
+                        url: './asset/operatRecordWin.html',
+                        pageParam: {
+                            coin_id: id,
+                        }
+                    });
+                },
+                goRecharge: function (id) {
+                    api.openWin({
+                        name: 'rechargedWin',
+                        url: './asset/rechargedWin.html',
+                        pageParam: {
+                            coin_id: id,
+                        }
+                    });
+                },
+                goTip: function () {
+                    alert("请先去实名认证！");
+                }
+            }
+        });
+    }
+</script>
